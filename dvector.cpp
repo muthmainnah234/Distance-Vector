@@ -158,6 +158,7 @@ int main() {
 			/* PROSES NODE UJI KE 1*/
 			//cout << "row tabel ke:"<< j << " :" <<endl;
 			//KASUS AD YG TIDAK TAHU
+			/*
 			if(A->RT[sken[i].x].nodeInfo[j].distance == -1 && A->RT[sken[i].y].nodeInfo[j].distance != -1){
 				//cout << "update pengetahuan node "<< sken[i].x << " row ke " << j <<endl;
 				A->RT[sken[i].x].nodeInfo[j].distance = A->RT[sken[i].y].nodeInfo[j].distance + 1;
@@ -176,7 +177,7 @@ int main() {
 					//cout << j << " " << A->RT[sken[i].x].nodeInfo[j].distance << " " << A->RT[sken[i].x].nodeInfo[j].nextHop << endl;
 				}
 			}
-
+			*/
 			/* PROSES NODE UJI KE 2*/
 			//KASUS AD YG TIDAK TAHU
 			if(A->RT[sken[i].y].nodeInfo[j].distance == -1 && A->RT[sken[i].x].nodeInfo[j].distance != -1){
@@ -188,13 +189,13 @@ int main() {
 			}
 
 			//KASUS AD YG BEDA INFORMASINYA
-			if(A->RT[sken[i].y].nodeInfo[j].distance != -1 && A->RT[sken[i].x].nodeInfo[j].distance != -1 && A->RT[sken[i].y].nodeInfo[j].nextHop != A->RT[sken[i].x].nodeInfo[j].nextHop ){
-				if(A->RT[sken[i].y].nodeInfo[j].distance < A->RT[sken[i].x].nodeInfo[j].distance){
-					//cout << "pergantian pengetahuan node " << sken[i].y << " row ke " << j <<endl;
-					A->RT[sken[i].x].nodeInfo[j].distance = A->RT[sken[i].y].nodeInfo[j].distance + 1;
-					A->RT[sken[i].x].nodeInfo[j].nextHop = sken[i].y;
+			if(A->RT[sken[i].x].nodeInfo[j].distance != -1 && A->RT[sken[i].y].nodeInfo[j].distance != -1 && A->RT[sken[i].x].nodeInfo[j].nextHop != A->RT[sken[i].y].nodeInfo[j].nextHop ){
+				if(A->RT[sken[i].x].nodeInfo[j].distance < A->RT[sken[i].y].nodeInfo[j].distance){
+					//cout << "pergantian pengetahuan node " << sken[i].x << " row ke " << j <<endl;
+					A->RT[sken[i].y].nodeInfo[j].distance = A->RT[sken[i].x].nodeInfo[j].distance + 1;
+					A->RT[sken[i].y].nodeInfo[j].nextHop = sken[i].x;
 
-					//cout << j << " " << A->RT[sken[i].y].nodeInfo[j].distance << " " << A->RT[sken[i].x].nodeInfo[j].nextHop << endl;
+					//cout << j << " " << A->RT[sken[i].x].nodeInfo[j].distance << " " << A->RT[sken[i].x].nodeInfo[j].nextHop << endl;
 				}
 			}
 		}
