@@ -196,6 +196,15 @@ int main() {
 					A->RT[sken[i].y].nodeInfo[j].nextHop = sken[i].x;
 
 					//cout << j << " " << A->RT[sken[i].x].nodeInfo[j].distance << " " << A->RT[sken[i].x].nodeInfo[j].nextHop << endl;
+				} else{
+					if(A->RT[sken[i].x].nodeInfo[j].distance == A->RT[sken[i].y].nodeInfo[j].distance){
+						//cout << "pergantian pengetahuan node " << sken[i].x << " row ke " << j <<endl;
+						if(A->RT[sken[i].x].nodeInfo[j].nextHop < A->RT[sken[i].y].nodeInfo[j].nextHop){
+							A->RT[sken[i].y].nodeInfo[j].nextHop = sken[i].x;
+						}s
+
+						//cout << j << " " << A->RT[sken[i].x].nodeInfo[j].distance << " " << A->RT[sken[i].x].nodeInfo[j].nextHop << endl;
+					}
 				}
 			}
 		}
