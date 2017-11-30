@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 using namespace std;
 
 static int N, M, S;
@@ -96,7 +97,8 @@ int main() {
 	Skenario* sken;
 	int i,j;
 
-	cin >> N >> M;
+	//cin >> N >> M;
+	scanf("%d %d",&N,&M);
 
 	//cout << "CHECKPOINT 1: READ SKENARIO DAN TOPOLOGI"<<endl;
 
@@ -201,7 +203,7 @@ int main() {
 						//cout << "pergantian pengetahuan node " << sken[i].x << " row ke " << j <<endl;
 						if(A->RT[sken[i].x].nodeInfo[j].nextHop < A->RT[sken[i].y].nodeInfo[j].nextHop){
 							A->RT[sken[i].y].nodeInfo[j].nextHop = sken[i].x;
-						}s
+						}
 
 						//cout << j << " " << A->RT[sken[i].x].nodeInfo[j].distance << " " << A->RT[sken[i].x].nodeInfo[j].nextHop << endl;
 					}
@@ -223,11 +225,16 @@ int main() {
 	}
 	*/
 	/* OUTPUT GRADER */
+	int num1;
+	int num2;
 	for(i=1; i<=N; i++)
 	{
 		for(j=1; j<=N; j++)
 		{
-			cout <<A->RT[i].nodeInfo[j].distance << " " << A->RT[i].nodeInfo[j].nextHop << endl;
+			num1 = A->RT[i].nodeInfo[j].distance;
+			num2 = A->RT[i].nodeInfo[j].nextHop;
+			printf("%d %d\n",num1,num2);
+			//cout <<A->RT[i].nodeInfo[j].distance << " " << A->RT[i].nodeInfo[j].nextHop << endl;
 		}
 	}
 
