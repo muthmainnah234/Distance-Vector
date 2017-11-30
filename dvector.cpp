@@ -74,6 +74,8 @@ public:
 		}
 	}
 
+
+
 	void Print()
 	{
 		int i,j;
@@ -95,6 +97,9 @@ int main() {
 	int i,j;
 
 	cin >> N >> M;
+
+	cout << "CHECKPOINT 1: READ SKENARIO DAN TOPOLOGI"<<endl;
+
 	top = new Topologi[M+1];
 	for(i=1; i<=M; i++)
 	{
@@ -108,7 +113,7 @@ int main() {
 	}
 
 	/* tes output */
-	/*cout << "topologi" << endl;
+	cout << "topologi" << endl;
 	for(i=1; i<=M; i++)
 	{
 		cout << top[i].u << " " << top[i].v << endl;
@@ -117,13 +122,15 @@ int main() {
 	for(i=1; i<=S; i++)
 	{
 		cout << sken[i].x << " " << sken[i].y << endl;
-	}*/
+	}
+
+	cout << "CHECKPOINT 2: INISIALISASI ROUTING TABLE"<<endl;
 
 	A = new RoutingTable();
 	A->Initiate(top);
-
+	
 	/* tes output inisialisasi routing table*/
-	/*for(i=1; i<=N; i++)
+	for(i=1; i<=N; i++)
 	{
 		cout << "Node " << i << endl;
 		for(j=1; j<=N; j++)
@@ -131,10 +138,49 @@ int main() {
 			cout << j << " " << A->RT[i].nodeInfo[j].distance << " " << A->RT[i].nodeInfo[j].nextHop << endl;
 		}
 		cout << endl;
-	}*/
+	}
+
+	cout << "CHECKPOINT 3: TRANSFER KNOWLEDGE"<<endl;
+
+
 
 	/* tes output inisialisasi dengan method Print() */
-	A->Print();
+	//A->Print();
+
+	/* ITERASI SEMUA SKENARIO */
+	for(i=1;i<=S;i++){
+		cout<< "kasus "<< i <<" :"<<endl;
+		cout << sken[i].x << " " << sken[i].y << endl;
+
+		for(j = 1;j<=N;j++){
+			//KASUS AD YG TIDAK TAHU
+			if(A->RT[sken[i].x].nodeInfo[j].distance == -1 && A->RT[sken[i].y].nodeInfo[j].distance != -1){
+				A->RT[sken[i].x].nodeInfo[j].distance += A->RT[sken[i].y].nodeInfo[j].distance;
+				A->RT[sken[i].x].nodeInfo[j].nextHop = sken[i].y;
+			}
+
+			//KASUS AD YG BEDA INFORMASINYA
+			if(A->RT[sken[i].x].nodeInfo[j].distance != -1 && A->RT[sken[i].y].nodeInfo[j].distance != -1 && A->RT[sken[i].x].nodeInfo[j].nextHop != A->RT[sken[i].y].nodeInfo[j].nextHop ){
+				if(A->RT[sken[i].x].nodeInfo[j].distance < A->RT[sken[i].y].nodeInfo[j].distance){
+					A->RT[sken[i].y].nodeInfo[j].distance = A->RT[sken[i].x].nodeInfo[j].distance + 1;
+					A->RT[sken[i].y].nodeInfo[j].nextHop = A->RT[sken[i].x].nodeInfo[j].nextHop;
+				}
+			}
+		}
+	}
+
+	/* tes output */
+	for(i=1; i<=N; i++)
+	{
+		cout << "Node " << i << endl;
+		for(j=1; j<=N; j++)
+		{
+			cout << j << " " << A->RT[i].nodeInfo[j].distance << " " << A->RT[i].nodeInfo[j].nextHop << endl;
+		}
+		cout << endl;
+	}
+
+	/*  */
 
 	return 0;
 }
